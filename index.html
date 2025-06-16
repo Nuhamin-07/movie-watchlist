@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <header>
+            <h1>Find Your Film</h1>
+            <p>My Watchlist</p>
+        </header>
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+                id="movie-search-input"
+                type="text" 
+                placeholder="Search for a movie" 
+                required aria-label="Movie search bar"
+                class="search-movie"/>
+            <button id="search-btn" class="search-btn">Search</button>
+        </div>
+        <div id="movie-list" class="movie-list">
+            <i class="fa-solid fa-film fa-2x"></i>
+            <p>Start Exploring</p>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
