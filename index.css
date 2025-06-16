@@ -121,3 +121,8 @@ p.movie-description {
 .movie-title h3 {
   max-width: 70%;
 }
+
+header a {
+  text-decoration: none;
+  color: #fff;
+}
