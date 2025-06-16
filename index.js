@@ -1,15 +1,20 @@
-const movieSearchInput = document.getElementById("movie-search-input")
+const movieSearchInput = document.getElementById("movie-search-input");
 
-    
-document.getElementById("search-btn").addEventListener("click", async function() {
-    let html = ""
-    const res = await fetch(`https://www.omdbapi.com/?s=${movieSearchInput.value}&apikey=60fd65e9`)
-    const data = await res.json()
-            for(let movie of data.Search) {
-                const resTwo = await fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=60fd65e9`)
-                const dataTwo = await resTwo.json()
-                        html += `
-                    <div class="lists" data-id="${movie.imdbID}">
+document
+  .getElementById("search-btn")
+  .addEventListener("click", async function () {
+    let html = "";
+    const res = await fetch(
+      `https://www.omdbapi.com/?s=${movieSearchInput.value}&apikey=60fd65e9`
+    );
+    const data = await res.json();
+    for (let movie of data.Search) {
+      const resTwo = await fetch(
+        `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=60fd65e9`
+      );
+      const dataTwo = await resTwo.json();
+      html += `
+                    <div class="lists">
                         <img src="${dataTwo.Poster}"/>
                         <div>
                             <div class="movie-title">
@@ -22,7 +27,7 @@ document.getElementById("search-btn").addEventListener("click", async function()
                             <div class="movie-genre">
                                 <P>${dataTwo.Runtime}</P>
                                 <P>${dataTwo.Genre}</P>
-                                <button id="watchlist" class="watchlist">
+                                <button class="watchlist" data-id="${movie.imdbID}">
                                     <i class="fa-solid fa-circle-plus"></i>
                                     Watchlist
                                 </button>
@@ -31,13 +36,11 @@ document.getElementById("search-btn").addEventListener("click", async function()
                         </div>
                     </div>
                     <hr/>
-                `
-            }
-            document.getElementById("movie-list").innerHTML = html
-           
-//     document.getElementById("watchlist").addEventListener("click", function(e) {
-//     console.log(e.currentTarget.dataset.id)
-// })
-})
+                `;
+    }
+    document.getElementById("movie-list").innerHTML = html;
 
-
+    //     document.getElementById("watchlist").addEventListener("click", function(e) {
+    //     console.log(e.currentTarget.dataset.id)
+    // })
+  });
