@@ -4,7 +4,7 @@ function renderWatchlist() {
 
   for (let movie of watchList) {
     html += `
-      <div class="lists" data-id="${movie.imdbID}">
+      <div class="lists container" data-id="${movie.imdbID}">
         <img src="${movie.Poster}" />
         <div>
           <div class="movie-title">
@@ -21,7 +21,6 @@ function renderWatchlist() {
           <p class="movie-description">${movie.Plot}</p>
         </div>
       </div>
-      <hr/>
     `;
   }
 
