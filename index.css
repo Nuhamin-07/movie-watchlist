@@ -88,7 +88,8 @@ header {
   font-size: 12px;
 }
 
-.lists button {
+.lists button,
+.remove-watchlist {
   font-size: 10px;
 }
 
@@ -107,6 +108,7 @@ header {
   justify-content: flex-start;
   gap: 1em;
   max-width: 60%;
+  align-items: center;
 }
 
 p.movie-description {
