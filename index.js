@@ -1,26 +1,30 @@
 const movieSearchInput = document.getElementById("movie-search-input");
 const watchListMovies = JSON.parse(localStorage.getItem("watchlist")) || [];
-let movieDetailMap = {}; // Store details keyed by imdbID
+let movieDetailMap = {};
 
 document
   .getElementById("search-btn")
   .addEventListener("click", async function () {
     let html = "";
-    movieDetailMap = {}; // Clear old results
+    movieDetailMap = {};
 
-    const res = await fetch(
-      `https://www.omdbapi.com/?s=${movieSearchInput.value}&apikey=60fd65e9`
-    );
-    const data = await res.json();
+    const loader = document.getElementById("loader");
+    loader.style.display = "block";
 
-    for (let movie of data.Search) {
-      const resTwo = await fetch(
-        `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=60fd65e9`
+    try {
+      const res = await fetch(
+        `https://www.omdbapi.com/?s=${movieSearchInput.value}&apikey=60fd65e9`
       );
-      const dataTwo = await resTwo.json();
-      movieDetailMap[movie.imdbID] = dataTwo; // Store full detail
+      const data = await res.json();
 
-      html += `
+      for (let movie of data.Search) {
+        const resTwo = await fetch(
+          `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=60fd65e9`
+        );
+        const dataTwo = await resTwo.json();
+        movieDetailMap[movie.imdbID] = dataTwo;
+
+        html += `
       <div class="lists">
         <img src="${dataTwo.Poster}"/>
         <div>
@@ -40,12 +44,18 @@ document
       </div>
       <hr/>
     `;
-    }
+      }
 
-    document.getElementById("movie-list").innerHTML = html;
+      document.getElementById("movie-list").innerHTML = html;
+    } catch (err) {
+      movieList.innerHTML =
+        "<p>Failed to load movies. Please try again later.</p>";
+      console.error(err);
+    } finally {
+      loader.style.display = "none"; // Always hide loader
+    }
   });
 
-// Handle button clicks separately
 document.addEventListener("click", function (e) {
   const watchBtn = e.target.closest(".watchlist");
   if (watchBtn && watchBtn.dataset.id) {

@@ -26,7 +26,6 @@ function renderWatchlist() {
 
   document.getElementById("my-watchlist").innerHTML = html;
 
-  // Add click event listeners to all remove buttons
   const removeButtons = document.querySelectorAll(".remove-watchlist");
   removeButtons.forEach((button) => {
     button.addEventListener("click", function () {
@@ -40,5 +39,4 @@ function renderWatchlist() {
   });
 }
 
-// Call the function on page load
 renderWatchlist();
